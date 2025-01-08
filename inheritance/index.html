@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance in C++</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+        }
+        .custom-cursor {
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Inheritance in C++</h1>
+
+    <!-- Key Concepts -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <i class="fas fa-lightbulb"></i> Key Concepts
+        </div>
+        <div class="card-body">
+            <ul>
+                <li><strong>Base Class:</strong> The class whose properties and methods are inherited.</li>
+                <li><strong>Derived Class:</strong> The class that inherits the properties and methods of the base class.</li>
+                <li><strong>Types of Inheritance:</strong> Single, Multiple, Multilevel, Hierarchical, Hybrid.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Types of Inheritance -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <i class="fas fa-sitemap"></i> Types of Inheritance
+        </div>
+        <div class="card-body">
+            <h5>1. Single Inheritance</h5>
+            <p><b>A derived class inherits from a single base class.</b></p>
+            <p style="font-family: 'Courier New', Courier, monospace;"><b>EXAMPLE:</b></p>
+            <pre><code class="language-cpp">class Base {
+public:
+    void display() {
+        cout << "This is the Base class." << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() {
+        cout << "This is the Derived class." << endl;
+    }
+};</code></pre>
+
+            <h5>2. Multiple Inheritance</h5>
+            <p><b>A derived class inherits from more than one base class.</b></p>
+            <p style="font-family: 'Courier New', Courier, monospace;"><b>EXAMPLE:</b></p>
+            <pre><code class="language-cpp">class ClassA {
+public:
+    void displayA() {
+        cout << "This is Class A." << endl;
+    }
+};
+
+class ClassB {
+public:
+    void displayB() {
+        cout << "This is Class B." << endl;
+    }
+};
+
+class Derived : public ClassA, public ClassB {
+public:
+    void show() {
+        cout << "This is the Derived class." << endl;
+    }
+};</code></pre>
+
+            <h5>3. Multilevel Inheritance</h5>
+            <p><b>A class derives from a class that is already derived from another class.            </b></p>
+            <p style="font-family: 'Courier New', Courier, monospace;"><b>EXAMPLE:</b></p>
+            <pre><code class="language-cpp">class Grandparent {
+public:
+    void showGrandparent() {
+        cout << "This is the Grandparent class." << endl;
+    }
+};
+
+class Parent : public Grandparent {
+public:
+    void showParent() {
+        cout << "This is the Parent class." << endl;
+    }
+};
+
+class Child : public Parent {
+public:
+    void showChild() {
+        cout << "This is the Child class." << endl;
+    }
+};</code></pre>
+
+            <h5>4. Hierarchical Inheritance</h5>
+            <p><b>Multiple derived classes inherit from a single base class.</b></p>
+            <p style="font-family: 'Courier New', Courier, monospace;"><b>EXAMPLE:</b></p>
+            <pre><code class="language-cpp">class Base {
+public:
+    void display() {
+        cout << "This is the Base class." << endl;
+    }
+};
+
+class Derived1 : public Base {
+public:
+    void show1() {
+        cout << "This is Derived class 1." << endl;
+    }
+};
+
+class Derived2 : public Base {
+public:
+    void show2() {
+        cout << "This is Derived class 2." << endl;
+    }
+};</code></pre>
+<h5>5. Hybrid Inheritance</h5>
+<p><b>Multiple derived classes inherit from a single base class.</b></p>
+        </div>
+    </div>
+
+    <!-- Access Specifiers -->
+    <div class="card mb-4">
+        <div class="card-header bg-warning text-dark">
+            <i class="fas fa-key"></i> Access Specifiers
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-primary">
+                            <th>Access Specifier</th>
+                            <th>Accessible in Derived Class</th>
+                            <th>Accessible Outside Class</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-success">
+                            <td>Public</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr class="table-danger">
+                            <td>Private</td>
+                            <td>No</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="table-warning">
+                            <td>Protected</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+  <script>
+    window.onload = function () {
+      // Create a <style> element for custom cursor CSS
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .custom-cursor {
+          position: fixed;
+          pointer-events: none;
+          z-index: 9999;
+          height: 70px;
+        }
+      `;
+      document.head.appendChild(style); // Append the style to the <head>
+
+      // Create the custom cursor image
+      const cursor = document.createElement('img');
+      cursor.src = 'https://media.giphy.com/media/XCAbMJWD9dlPa/giphy.gif';
+      cursor.classList.add('custom-cursor');
+      document.body.appendChild(cursor); // Add the cursor to the document
+
+      // Update the cursor's position on mouse move
+      document.addEventListener('mousemove', (e) => {
+        const cursorOffsetX = cursor.clientWidth / 2;
+        const cursorOffsetY = cursor.clientHeight / 2;
+        cursor.style.left = `${e.clientX - cursorOffsetX}px`;
+        cursor.style.top = `${e.clientY - cursorOffsetY}px`;
+      });
+    };
+  </script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
