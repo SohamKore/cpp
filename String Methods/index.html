@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Common C++ String Methods</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700;900&display=swap" rel="stylesheet" />
+  <style>
+            .custom-cursor {
+
+position: fixed !important;
+pointer-events: none !important;
+z-index: 9999 !important;
+height: 70px !important; /* Adjust the height as needed */
+}
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('bg_abs.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    header {
+      background-color: #FDB600;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 900;
+    }
+
+    .container {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #FEDD87;
+      border-left: 5px solid #FAA83A;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #333;
+    }
+
+    .desc {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .syntax,
+    .returns {
+      background: #fff8e1;
+      padding: 0.5rem;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #FDB600;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Common C++ <code>std::string</code> Methods</h1>
+  </header>
+  <div class="container">
+    <!-- Cards for 25 string methods -->
+    <!-- These are added programmatically for brevity -->
+    <script>
+      const methods = [
+        { name: 'empty()', desc: 'Checks whether the string is empty.', syntax: 'string.empty()', returns: 'bool (true if empty)' },
+        { name: 'length() / size()', desc: 'Returns the length of the string.', syntax: 'string.length() or string.size()', returns: 'size_t' },
+        { name: 'clear()', desc: 'Clears the contents of the string.', syntax: 'string.clear()', returns: 'void' },
+        { name: 'append()', desc: 'Adds characters to the end of the string.', syntax: 'string.append(str)', returns: 'reference to string' },
+        { name: 'push_back()', desc: 'Appends a single character to the end.', syntax: 'string.push_back(char)', returns: 'void' },
+        { name: 'pop_back()', desc: 'Removes the last character.', syntax: 'string.pop_back()', returns: 'void' },
+        { name: 'substr()', desc: 'Returns a substring.', syntax: 'string.substr(pos, len)', returns: 'string' },
+        { name: 'find()', desc: 'Finds the first occurrence.', syntax: 'string.find(str)', returns: 'size_t or npos' },
+        { name: 'rfind()', desc: 'Finds the last occurrence.', syntax: 'string.rfind(str)', returns: 'size_t or npos' },
+        { name: 'compare()', desc: 'Compares two strings.', syntax: 'string.compare(str)', returns: 'int (-1, 0, 1)' },
+        { name: 'replace()', desc: 'Replaces part of the string.', syntax: 'string.replace(pos, len, str)', returns: 'string&' },
+        { name: 'insert()', desc: 'Inserts into the string.', syntax: 'string.insert(pos, str)', returns: 'string&' },
+        { name: 'erase()', desc: 'Erases part of the string.', syntax: 'string.erase(pos, len)', returns: 'string&' },
+        { name: 'swap()', desc: 'Swaps contents with another string.', syntax: 'string.swap(str)', returns: 'void' },
+        { name: 'c_str()', desc: 'Returns C-style string.', syntax: 'string.c_str()', returns: 'const char*' },
+        { name: 'data()', desc: 'Returns pointer to internal data.', syntax: 'string.data()', returns: 'const char*' },
+        { name: 'copy()', desc: 'Copies characters to array.', syntax: 'string.copy(buffer, len, pos)', returns: 'size_t' },
+        { name: 'resize()', desc: 'Resizes the string.', syntax: 'string.resize(n)', returns: 'void' },
+        { name: 'capacity()', desc: 'Returns size of allocated storage.', syntax: 'string.capacity()', returns: 'size_t' },
+        { name: 'shrink_to_fit()', desc: 'Reduces capacity to fit size.', syntax: 'string.shrink_to_fit()', returns: 'void' },
+        { name: 'reserve()', desc: 'Requests change in capacity.', syntax: 'string.reserve(n)', returns: 'void' },
+        { name: 'at()', desc: 'Returns character at pos with bounds check.', syntax: 'string.at(pos)', returns: 'char& or const char&' },
+        { name: 'front()', desc: 'Accesses first character.', syntax: 'string.front()', returns: 'char& or const char&' },
+        { name: 'back()', desc: 'Accesses last character.', syntax: 'string.back()', returns: 'char& or const char&' },
+        { name: 'operator+=', desc: 'Appends characters using +=.', syntax: 'string += str or char', returns: 'string&' }
+      ];
+
+      const container = document.querySelector('.container');
+      methods.forEach((method, i) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h2>${i + 1}. <code>${method.name}</code></h2>
+          <p class="desc">${method.desc}</p>
+          <div class="syntax"><strong>Syntax:</strong> ${method.syntax}</div>
+          <div class="returns"><strong>Returns:</strong> ${method.returns}</div>
+        `;
+        container.appendChild(card);
+      });
+
+       window.onload = function() {
+    var cursor = document.createElement('img');
+      cursor.src = 'cato.gif';
+      cursor.classList.add('custom-cursor');
+      
+      // Add cursor to the document
+      document.body.appendChild(cursor);
+      
+      // Adjust cursor position based on mouse movement
+      document.addEventListener('mousemove', function(e) {
+        console.log(1)
+        var cursorOffsetX = cursor.width / 2;
+        var cursorOffsetY = cursor.height / 2;
+        cursor.style.left = (e.clientX - cursorOffsetX) + 'px';
+        cursor.style.top = (e.clientY - cursorOffsetY) + 'px';
+      });
+
+    </script>
+  </div>
+  <footer>
+    &copy; 2025 C++ String Methods Reference - Design by Om Kore
+  </footer>
+</body>
+
+</html>
