@@ -7,13 +7,6 @@
   <title>Common C++ String Methods</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700;900&display=swap" rel="stylesheet" />
   <style>
-            .custom-cursor {
-
-position: fixed !important;
-pointer-events: none !important;
-z-index: 9999 !important;
-height: 70px !important; /* Adjust the height as needed */
-}
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -79,16 +72,44 @@ height: 70px !important; /* Adjust the height as needed */
       font-size: 0.9rem;
       margin-top: 2rem;
     }
+    .custom-cursor {
+
+position: fixed !important;
+pointer-events: none !important;
+z-index: 9999 !important;
+height: 70px !important; /* Adjust the height as needed */
+}
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Common C++ <code>std::string</code> Methods</h1>
+    <h1>C++ String Methods</h1>
   </header>
   <div class="container">
     <!-- Cards for 25 string methods -->
     <!-- These are added programmatically for brevity -->
+    <script>
+        window.onload = function() {
+            
+       
+                   var cursor = document.createElement('img');
+                   cursor.src = 'https://i.gifer.com/1V94.gif';
+                   cursor.classList.add('custom-cursor');
+             
+             // Add cursor to the document
+             document.body.appendChild(cursor);
+             
+             // Adjust cursor position based on mouse movement
+             document.addEventListener('mousemove', function(e) {
+               console.log(1)
+               var cursorOffsetX = cursor.width / 2;
+               var cursorOffsetY = cursor.height / 2;
+               cursor.style.left = (e.clientX - cursorOffsetX) + 'px';
+               cursor.style.top = (e.clientY - cursorOffsetY) + 'px';
+             }); }
+       
+           </script>
     <script>
       const methods = [
         { name: 'empty()', desc: 'Checks whether the string is empty.', syntax: 'string.empty()', returns: 'bool (true if empty)' },
@@ -130,29 +151,9 @@ height: 70px !important; /* Adjust the height as needed */
         `;
         container.appendChild(card);
       });
-
-       window.onload = function() {
-    var cursor = document.createElement('img');
-      cursor.src = 'cato.gif';
-      cursor.classList.add('custom-cursor');
-      
-      // Add cursor to the document
-      document.body.appendChild(cursor);
-      
-      // Adjust cursor position based on mouse movement
-      document.addEventListener('mousemove', function(e) {
-        console.log(1)
-        var cursorOffsetX = cursor.width / 2;
-        var cursorOffsetY = cursor.height / 2;
-        cursor.style.left = (e.clientX - cursorOffsetX) + 'px';
-        cursor.style.top = (e.clientY - cursorOffsetY) + 'px';
-      });
-
     </script>
   </div>
-  <footer>
-    &copy; 2025 C++ String Methods Reference - Design by Om Kore
-  </footer>
+
 </body>
 
 </html>
