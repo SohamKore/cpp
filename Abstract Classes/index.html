@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Markdown Viewer - Dark + Code Highlighting</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    #content {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    pre {
+      background-color: #2d2d2d;
+      border-radius: 6px;
+      padding: 15px;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #3c3c3c;
+      margin: 30px 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+    }
+
+    a {
+      color: #4ea1ff;
+    }
+
+    strong {
+      color: #ffffff;
+    }
+        .custom-cursor {
+
+position: fixed !important;
+pointer-events: none !important;
+z-index: 9999 !important;
+height: 70px !important; /* Adjust the height as needed */
+}
+  </style>
+</head>
+<body>
+
+<div id="content"></div>
+    <script>
+        window.onload = function() {
+            
+       
+                   var cursor = document.createElement('img');
+                   cursor.src = 'https://i.gifer.com/1V94.gif';
+                   cursor.classList.add('custom-cursor');
+             
+             // Add cursor to the document
+             document.body.appendChild(cursor);
+             
+             // Adjust cursor position based on mouse movement
+             document.addEventListener('mousemove', function(e) {
+               console.log(1)
+               var cursorOffsetX = cursor.width / 2;
+               var cursorOffsetY = cursor.height / 2;
+               cursor.style.left = (e.clientX - cursorOffsetX) + 'px';
+               cursor.style.top = (e.clientY - cursorOffsetY) + 'px';
+             }); }
+       
+           </script>
+<script>
+  const markdownContent = `
+
+---
+
+## ✅ What is an Abstract Class in C++?
+
+An **abstract class** in C++ is a class that **cannot be instantiated** (i.e., you cannot create objects from it). It is meant to serve as a **base class** for other classes.
+
+A class becomes abstract when it contains **at least one pure virtual function**.
+
+---
+
+## 🔹 Pure Virtual Function
+
+A **pure virtual function** is declared by assigning \`= 0\` in its declaration:
+
+\`\`\`cpp
+virtual void functionName() = 0;
+\`\`\`
+
+This tells the compiler that the function **must be overridden** in any derived class.
+
+---
+
+## 🧠 Why Use Abstract Classes?
+
+Abstract classes are useful when you want to define an **interface** or a **common base** for other classes. They provide a way to enforce a **contract**: all derived classes must implement the pure virtual functions.
+
+---
+
+## 🔸 Example
+
+\`\`\`cpp
+#include <iostream>
+using namespace std;
+
+// Abstract class
+class Animal {
+public:
+    // Pure virtual function
+    virtual void makeSound() = 0;
+
+    void sleep() {
+        cout << "Sleeping..." << endl;
+    }
+};
+
+// Derived class
+class Dog : public Animal {
+public:
+    void makeSound() override {
+        cout << "Woof!" << endl;
+    }
+};
+
+// Another derived class
+class Cat : public Animal {
+public:
+    void makeSound() override {
+        cout << "Meow!" << endl;
+    }
+};
+
+int main() {
+    // Animal a; // ❌ Error: cannot instantiate abstract class
+
+    Dog d;
+    Cat c;
+
+    d.makeSound();  // Output: Woof!
+    d.sleep();      // Output: Sleeping...
+
+    c.makeSound();  // Output: Meow!
+    c.sleep();      // Output: Sleeping...
+
+    return 0;
+}
+\`\`\`
+
+---
+
+## 🧾 Key Points
+
+* Abstract classes have at least one **pure virtual function**.
+* You **cannot create objects** of an abstract class.
+* Derived classes **must override** all pure virtual functions.
+* Abstract classes can have **normal member functions** too.
+
+---
+`;
+
+  // Render and highlight
+  const html = marked.parse(markdownContent);
+  document.getElementById('content').innerHTML = html;
+  document.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
+</script>
+
+</body>
+</html>
